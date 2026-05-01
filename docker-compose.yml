@@ -11,6 +11,7 @@ services:
       - php
   php:
     build: ./php
+    container_name: php
     volumes:
       - ./src:/var/www/html
     depends_on:
