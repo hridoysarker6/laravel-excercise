@@ -18,14 +18,20 @@ services:
       - db
 
   db:
-    image: mysql:5.7
+    # image: postgres:13
+    image: pgvector/pgvector:pg13
+    container_name: postgres_db
+    restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: mydatabase
-      MYSQL_USER: myuser
-      MYSQL_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+
+    ports:
+      - "5432:5432"
+
     volumes:
-      - db_data:/var/lib/mysql
+      - db_data:/var/lib/postgresql/data
 
 volumes:
   db_data:
